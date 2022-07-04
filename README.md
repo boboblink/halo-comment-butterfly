@@ -1,11 +1,6 @@
-<h1 align="center"><a href="https://gitee.com/duider/halo-comment-joe2.0" target="_blank">halo-comment-joe2.0</a></h1>
-<p align="center">
-  <a href="https://github.com/qinhua/halo-theme-joe2.0"><img alt="Build Status" src="https://img.shields.io/badge/build-positive-brightgreen?style=for-the-badge"></a>
-  <a href="https://github.com/prettier/prettier"><img alt="Code Style: Prettier" src="https://img.shields.io/badge/release-1.0.0-blue?style=for-the-badge"></a>
-  <a href="./LICENSE"><img alt="LICENSE MIT" src="https://img.shields.io/badge/license-MIT-blue.svg?style=for-the-badge"></a>
-</p>
+<h1 align="center"><a href="https://github.com/boboblink/halo-comment-butterfly" target="_blank">halo-comment-betterfly</a></h1>
 
-> 仅适用于 `halo-theme-joe2.0` 主题的评论组件，基于 `LIlGG` 开发的 [halo-comment-sakura](https://github.com/LIlGG/halo-comment-sakura) 定制而成，在此感谢原作者。
+> 仅适用于 `halo-theme-butterfly` 主题的评论组件，基于 `LIlGG` 开发的 [halo-comment-sakura](https://github.com/LIlGG/halo-comment-sakura) 定制而成，在此感谢原作者。
 
 ### 自定义配置
 
