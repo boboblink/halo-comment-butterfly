@@ -70,58 +70,63 @@
       <!-- 上传图片预览 -->
       <div id="upload-img-show"></div>
       <!-- 表情开关 -->
-      <p id="emotion-toggle" class="no-select">
-        <span @click="handleToggleDialogEmoji">{{
-          !emojiDialogVisible ? "戳我试试 OωO" : "嘿嘿嘿 ヾ(≧∇≦*)ゝ"
-        }}</span>
-      </p>
-      <transition name="emoji-fade">
-        <VEmojiPicker
-          :pack="emojiPack"
-          @select="handleSelectEmoji"
-          v-if="emojiDialogVisible"
-        />
-      </transition>
-      <ul class="comment-buttons">
-        <li class="middle" id="reply-title" v-if="isReply">
-          <a
-            href="javascript:;"
-            class="button-cancel-reply"
-            @click="cancelReply"
-            >取消回复</a
-          >
-        </li>
-        <li v-if="comment.content" class="middle">
-          <a
-            class="button-preview-edit"
-            href="javascript:;"
-            rel="nofollow noopener"
-            @click="handlePreviewContent"
-            >{{ previewMode ? "编辑" : "预览" }}</a
-          >
-        </li>
-        <!-- <li
-            class="middle"
-            style="margin-right:5px"
-          >
+      <div class="comment-tools">
+        <p id="emotion-toggle" class="no-select">
+          <span v-if="!emojiDialogVisible" @click="handleToggleDialogEmoji">
+            <svg t="1656983622616" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2570" width="24" height="24"><path d="M511.5 958.9c-60.3 0-118.9-11.8-174-35.1-53.2-22.5-101-54.7-142.1-95.8-41-41-73.3-88.8-95.8-142.1-23.3-55.1-35.1-113.7-35.1-174s11.8-118.9 35.1-174c22.5-53.2 54.7-101 95.8-142.1 41-41 88.8-73.3 142.1-95.8 55.1-23.3 113.7-35.1 174-35.1s118.9 11.8 174 35.1c53.2 22.5 101 54.7 142.1 95.8 41 41 73.3 88.8 95.8 142.1 23.3 55.1 35.1 113.7 35.1 174s-11.8 118.9-35.1 174c-22.5 53.2-54.7 101-95.8 142.1-41 41-88.8 73.3-142.1 95.8-55.1 23.3-113.6 35.1-174 35.1z m0-838c-52.8 0-104 10.3-152.2 30.7-46.6 19.7-88.4 47.9-124.3 83.8s-64.1 77.7-83.8 124.3c-20.4 48.2-30.7 99.4-30.7 152.2s10.3 104 30.7 152.2c19.7 46.6 47.9 88.4 83.8 124.3s77.7 64.1 124.3 83.8c48.2 20.4 99.4 30.7 152.2 30.7s104-10.3 152.2-30.7c46.6-19.7 88.4-47.9 124.3-83.8 35.9-35.9 64.1-77.7 83.8-124.3 20.4-48.2 30.7-99.4 30.7-152.2s-10.3-104-30.7-152.2c-19.7-46.6-47.9-88.4-83.8-124.3-35.9-35.9-77.7-64.1-124.3-83.8-48.2-20.3-99.4-30.7-152.2-30.7z" fill="" p-id="2571"></path><path d="M652.2 423.3m-54.7 0a54.7 54.7 0 1 0 109.4 0 54.7 54.7 0 1 0-109.4 0Z" fill="" p-id="2572"></path><path d="M370.5 423.3m-54.7 0a54.7 54.7 0 1 0 109.4 0 54.7 54.7 0 1 0-109.4 0Z" fill="" p-id="2573"></path><path d="M511.5 775.9c-42.6 0-84.9-10.4-122.4-30.1-27-14.1-51.5-33.1-72.1-55.5-11.4-12.4-9.5-32 4.2-41.8 11.5-8.2 27.3-6.7 36.9 3.7 16.3 17.8 35.7 32.8 57.1 44 29.9 15.7 62.4 23.6 96.4 23.6 34 0 66.5-8 96.4-23.6 21.4-11.2 40.8-26.2 57.1-44 9.5-10.4 25.4-11.9 36.9-3.7 13.7 9.8 15.6 29.4 4.2 41.8-20.6 22.5-45.1 41.4-72.1 55.5-37.7 19.7-80 30.1-122.6 30.1z" fill="" p-id="2574"></path></svg>
+          </span>
+          <span v-else @click="handleToggleDialogEmoji">
+            <svg t="1656983785218" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1899" width="24" height="24"><path d="M513 959c-60.4 0-118.9-11.8-174.1-35.2-53.3-22.5-101.1-54.8-142.1-95.8-41.1-41.1-73.3-88.9-95.8-142.1-23.3-55.2-35.2-113.7-35.2-174.1s11.8-118.9 35.2-174.1c22.5-53.3 54.8-101.1 95.8-142.1 41.1-41.1 88.9-73.3 142.1-95.8C394.1 76.4 452.6 64.6 513 64.6s118.9 11.8 174.1 35.2c53.3 22.5 101.1 54.8 142.1 95.8 41.1 41.1 73.3 88.9 95.8 142.1 23.3 55.2 35.2 113.7 35.2 174.1s-11.8 118.9-35.2 174.1C902.5 739.1 870.3 787 829.2 828c-41.1 41.1-88.9 73.3-142.1 95.8C631.9 947.2 573.4 959 513 959zM513 120.6c-52.8 0-104.1 10.3-152.3 30.7-46.6 19.7-88.4 47.9-124.4 83.9-35.9 35.9-64.2 77.8-83.9 124.4-20.4 48.2-30.7 99.4-30.7 152.3s10.3 104.1 30.7 152.3c19.7 46.6 47.9 88.4 83.9 124.4 35.9 35.9 77.8 64.2 124.4 83.9C408.9 892.7 460.2 903 513 903s104.1-10.3 152.3-30.7c46.6-19.7 88.4-47.9 124.4-83.9 35.9-35.9 64.2-77.8 83.9-124.4 20.4-48.2 30.7-99.4 30.7-152.3s-10.3-104.1-30.7-152.3c-19.7-46.6-47.9-88.4-83.9-124.4-35.9-35.9-77.8-64.2-124.4-83.9C617.1 130.9 565.8 120.6 513 120.6z" fill="" p-id="1900"></path><path d="M630.6 398.3m-46.7 0a46.7 46.7 0 1 0 93.4 0 46.7 46.7 0 1 0-93.4 0Z" fill="" p-id="1901"></path><path d="M393.7 398.3m-46.7 0a46.7 46.7 0 1 0 93.4 0 46.7 46.7 0 1 0-93.4 0Z" fill="" p-id="1902"></path><path d="M513 790c-55.2 0-110-18.4-154.3-51.8-42.4-31.9-72.5-74.9-84.9-120.9-4.7-17.4-1-35.6 10-50 11.1-14.5 27.9-22.8 46.1-22.8l366.3-0.1h0c0 0 0 0 0 0 18.2 0 35 8.3 46.1 22.7 11 14.4 14.7 32.6 10 50-12.3 46-42.5 89-84.9 120.9C623 771.6 568.2 790 513 790zM696.1 600.4l-366.3 0.1c-0.3 0-1 0-1.7 0.8-0.5 0.7-0.4 1.2-0.3 1.4 9 33.5 32.5 66.5 64.5 90.6C427.1 719.6 469.9 734 513 734c43.1 0 85.9-14.4 120.7-40.6 32-24.1 55.5-57.2 64.5-90.7 0.1-0.3 0.2-0.7-0.3-1.4C697.2 600.4 696.4 600.4 696.1 600.4L696.1 600.4z" fill="" p-id="1903"></path></svg>
+          </span>
+        </p>
+        <ul class="comment-buttons">
+          <li class="middle" id="reply-title" v-if="isReply">
+            <a
+              href="javascript:;"
+              class="button-cancel-reply"
+              @click="cancelReply"
+              >取消回复</a
+            >
+          </li>
+          <li v-if="comment.content" class="middle">
             <a
               class="button-preview-edit"
-              href="javascript:void(0)"
+              href="javascript:;"
               rel="nofollow noopener"
-              @click="handleGithubLogin"
-            >Github 登陆</a>
-        </li>-->
-        <li class="middle">
-          <a
-            class="button-submit"
-            href="javascript:;"
-            tabindex="5"
-            rel="nofollow noopener"
-            @click="handleSubmitClick"
-            >提交</a
-          >
-        </li>
-      </ul>
+              @click="handlePreviewContent"
+              >{{ previewMode ? "编辑" : "预览" }}</a
+            >
+          </li>
+          <!-- <li
+              class="middle"
+              style="margin-right:5px"
+            >
+              <a
+                class="button-preview-edit"
+                href="javascript:void(0)"
+                rel="nofollow noopener"
+                @click="handleGithubLogin"
+              >Github 登陆</a>
+          </li>-->
+          <li class="middle">
+            <a
+              class="button-submit"
+              href="javascript:;"
+              tabindex="5"
+              rel="nofollow noopener"
+              @click="handleSubmitClick"
+              >提交</a
+            >
+          </li>
+        </ul>
+      </div>
+      <transition name="emoji-fade">
+          <VEmojiPicker
+            :pack="emojiPack"
+            @select="handleSelectEmoji"
+            v-if="emojiDialogVisible"
+          />
+        </transition>
     </form>
   </section>
 </template>

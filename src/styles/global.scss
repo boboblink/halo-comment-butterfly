@@ -290,9 +290,11 @@ div {
 
   .comment {
     margin: 0;
-    padding: 0;
+    padding: 0 10px;
+    border-radius: 8px;
     overflow: hidden;
     list-style: none;
+    background-color: var(--table-bg);
 
     .contents {
       width: 100%;
@@ -336,8 +338,8 @@ div {
         --------------------------------------------------------------*/
     .profile {
       float: left;
-      margin-right: 10px;
-      margin-top: 6px;
+      // margin-right: 10px;
+      // margin-top: 6px;
 
       a {
         &.disabled {
@@ -402,38 +404,25 @@ div {
         text-transform: none;
         color: rgba(0, 0, 0, 0.35);
 
-        .useragent-info {
-          img {
-            vertical-align: sub;
-            width: 14px;
-            height: 14px;
-            border: 0;
-          }
+        // .useragent-info-m {
+        //   margin-top: 2px;
+        //   font-size: 12px;
+        //   letter-spacing: 0px;
+        //   text-transform: none;
+        //   color: rgba(0, 0, 0, 0.35);
+        //   display: none;
 
-          @media (max-width: 480px) {
-            display: none;
-          }
-        }
+        //   img {
+        //     vertical-align: sub;
+        //     width: 14px;
+        //     height: 14px;
+        //     border: 0;
+        //   }
 
-        .useragent-info-m {
-          margin-top: 2px;
-          font-size: 12px;
-          letter-spacing: 0px;
-          text-transform: none;
-          color: rgba(0, 0, 0, 0.35);
-          display: none;
-
-          img {
-            vertical-align: sub;
-            width: 14px;
-            height: 14px;
-            border: 0;
-          }
-
-          @media (max-width: 480px) {
-            display: inline;
-          }
-        }
+        //   @media (max-width: 480px) {
+        //     display: inline;
+        //   }
+        // }
       }
 
       @media (max-width: 880px) {
@@ -485,7 +474,7 @@ div {
       float: right;
       text-transform: uppercase;
       color: #fff;
-      background-color: var(--theme);
+      background-color: $color;
       line-height: 20px;
       padding: 0 6px;
       border-radius: 3px;
@@ -567,11 +556,31 @@ div {
   }
 
   .markdown-body {
+    margin-left: 40px;
     margin-bottom: 15px;
     line-height: 1;
     white-space: pre-line;
     word-break: break-all;
     font-size: 14px !important;
+
+    .useragent-info {
+      display: flex;
+      align-items: center;
+      margin-top: 1em;
+
+      img {
+        vertical-align: sub;
+        width: 14px;
+        height: 14px;
+        border: 0;
+        margin-left: .5em;
+        margin-right: .2em;
+      }
+
+      @media (max-width: 480px) {
+        display: none;
+      }
+    }
 
     .markdown-content {
       padding: 10px;
@@ -711,8 +720,8 @@ div {
         margin: 0;
         padding: 10px;
         color: #535a63;
-        background-color: #f9f9f9;
-        border: 1px solid #ddd;
+        background-color: var(--table-bg);
+        border: 1px solid rgba(144, 147, 153, 0.31);
       }
 
       textarea {
@@ -747,10 +756,11 @@ div {
       --------------------------------------------------------------*/
       .comment-textarea {
         position: relative;
+        margin-top: 1em;
 
         .commentbody {
           &:focus {
-            border-color: var(--theme);
+            border-color: $color;
             transition: border-color 0.25s;
           }
 
@@ -762,8 +772,8 @@ div {
 
           &:not(:placeholder-shown)~.input-label,
           &:focus~.input-label {
-            color: #fff;
-            background-color: var(--theme);
+            color: var(--btn-color);
+            background-color: $color;
             transform: scale(0.75) translate(-2px, -37px);
             border-radius: 5px;
           }
@@ -869,6 +879,7 @@ div {
           align-items: center;
 
           span {
+            color: var(--font-color);
             line-height:1;
             font-size: 14px;
             padding: 11px;
@@ -888,7 +899,7 @@ div {
 
             &:focus {
               border-left: 1px solid;
-              border-color: var(--btn-color);
+              border-color: $color;
             }
           }
         }
@@ -933,62 +944,68 @@ div {
       /*--------------------------------------------------------------
        # Commment Reply Form - SubmitButtom
       --------------------------------------------------------------*/
-      .comment-buttons {
-        font-size: 14px;
-        text-align: right;
-        margin-top: 10px;
+      .comment-tools {
+        display: flex;
+        justify-content: space-between;
 
-        .middle {
-          display: inline-block;
-          vertical-align: middle;
-        }
-
-        .button-submit,
-        .button-preview-edit {
-          opacity: 0.9;
-          display: inline-block;
-          margin-left: 5px;
-          color: var(--btn-color);
-          font-weight: 500;
-          padding: 4px 12px;
-          text-transform: uppercase;
-          background: $color;
-          border: 1px solid $color;
-          border-radius: 4px;
-          animation: bottom20 500ms;
-          transition: all 0.3s ease 0s;
-
-          &:hover {
-            opacity: 1;
-            font-weight: 700;
-            letter-spacing: 3px;
-            box-shadow: 0px 5px 40px -10px rgba(0, 0, 0, 0.57);
-            transition: all 0.3s ease 0s;
+        .comment-buttons {
+          font-size: 14px;
+          text-align: right;
+          margin-top: 10px;
+  
+          .middle {
+            display: inline-block;
+            vertical-align: middle;
           }
-        }
-
-        .button-cancel-reply {
-          opacity: .9;
-          display: inline-block;
-          color: var(--minor);
-          font-weight: 500;
-          padding: 4px 12px;
-          text-transform: uppercase;
-          background: transparent;
-          border: 1px solid var(--minor);
-          border-radius: 4px;
-          animation: bottom20 .5s;
-          transition: all .3s ease 0s;
-
-          &:hover {
-            opacity: 1;
-            font-weight: 700;
-            letter-spacing: 3px;
-            box-shadow: 0px 5px 40px -10px rgba(0, 0, 0, 0.57);
+  
+          .button-submit,
+          .button-preview-edit {
+            opacity: 0.9;
+            display: inline-block;
+            margin-left: 5px;
+            color: var(--btn-color);
+            font-weight: 500;
+            padding: 4px 12px;
+            text-transform: uppercase;
+            background: $color;
+            border: 1px solid $color;
+            border-radius: 4px;
+            animation: bottom20 500ms;
             transition: all 0.3s ease 0s;
+  
+            &:hover {
+              opacity: 1;
+              font-weight: 700;
+              letter-spacing: 3px;
+              box-shadow: 0px 5px 40px -10px rgba(0, 0, 0, 0.57);
+              transition: all 0.3s ease 0s;
+            }
+          }
+  
+          .button-cancel-reply {
+            opacity: .9;
+            display: inline-block;
+            color: #fff;
+            font-weight: 500;
+            padding: 4px 12px;
+            text-transform: uppercase;
+            background: $color;
+            border: 1px solid $color;
+            border-radius: 4px;
+            animation: bottom20 .5s;
+            transition: all .3s ease 0s;
+  
+            &:hover {
+              opacity: 1;
+              font-weight: 700;
+              letter-spacing: 3px;
+              box-shadow: 0px 5px 40px -10px rgba(0, 0, 0, 0.57);
+              transition: all 0.3s ease 0s;
+            }
           }
         }
       }
+      
     }
 
     @media (max-width: 1080px) {
@@ -1194,7 +1211,7 @@ div {
 --------------------------------------------------------------*/
 #emotion-toggle {
   cursor: pointer;
-  text-align: center;
+  // text-align: center;
   margin-bottom: 5px;
 }
 

@@ -69,11 +69,11 @@
                     :datetime="comment.createTime"
                     >发布于 {{ createTimeAgo }}
                   </time>
-                  <span
+                  <!-- <span
                     v-if="configs.showUserAgent"
                     class="useragent-info"
                     v-html="compileUserAgent"
-                  ></span>
+                  ></span> -->
                 </div>
               </div>
             </section>
@@ -81,6 +81,11 @@
           <div class="body markdown-body">
             <!-- 将所有的评论内容约束为一段 -->
             <div class="markdown-content" v-html="compileContent"></div>
+            <span
+              v-if="configs.showUserAgent"
+              class="useragent-info"
+              v-html="compileUserAgent"
+            ></span>
           </div>
         </div>
       </div>
@@ -263,7 +268,7 @@ export default {
           break;
       }
 
-      return `（<img src="${browserImg}" onerror="this.src='${this.unknow_ua}'" alt="ua-browser"/>  ${result.browser.name} ${result.browser.version} <img src="${uaImg}" onerror="this.src='${this.unknow_ua}'" alt="ua-os"/> ${result.os.name} ${result.os.version}）`;
+      return `<img src="${uaImg}" onerror="this.src='${this.unknow_ua}'" alt="ua-os"/> ${result.os.name} ${result.os.version} <img src="${browserImg}" onerror="this.src='${this.unknow_ua}'" alt="ua-browser"/>  ${result.browser.name} ${result.browser.version} `;
     },
     selfAddDepth() {
       return this.depth + 1;
